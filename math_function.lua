@@ -10,8 +10,8 @@ print(math.random()) -- random range 0.0 - 1.0
 print(math.random(10)) -- random range 0 - 10
 print(math.random(10, 50)) -- randome range 10 - 50
 math.randomseed(os.time()) -- set the randomness of the current times.
-print(math.min(5,3,6,7,1,2)) -- get min from array
-print(math.max(ary))
+print(math.min(table.unpack(ary))) -- get min from array
+print(math.max(table.unpack(ary)))
 -- os function
 
 print(os.time())
@@ -40,3 +40,4 @@ for k, v in ipairs(t) do
 end
 
 print(key, min)
+
