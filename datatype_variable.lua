@@ -1,9 +1,9 @@
 --[[
-  nil
-  number
-  string
-  boolean
-  table  
+nil
+number
+string
+boolean
+table
 ]]
 
 -- nil
@@ -37,7 +37,7 @@ print(f)
 
 -- boolean สามารถนำมาใช้ ในการเช็คเปรียบเทียบ บน if .. else แบบนี้ได้ด้วย
 if f then
-    print("the statement is true")
+print("the statement is true")
 end
 
 -- table
@@ -86,7 +86,7 @@ print("The previous last element is",fruits[5])
 
 -- วนลูป table ด้วย ipairs()
 for k,v in ipairs(fruits) do
-   print(k,v)
+print(k,v)
 end
 
 -- sorting table
@@ -94,5 +94,21 @@ table.sort(fruits)
 print("sorted table")
 
 for k,v in ipairs(fruits) do
-   print(k,v)
+print(k,v)
 end
+
+-- ว่าด้วยเรื่อง global variable และ block
+
+j = 10 -- global variable
+do -- new block
+    local j = j -- new 'j', with value 10
+    print(j) --> 10
+    j = j+1
+    do -- another block
+        local j = j+1 -- another 'j'
+        print(j) --> 12
+        _G.j = 20 -- หรือ จะ setting ค่าผ่าน global โดยตรงด้วย _G.x , _ENV.x
+    end
+    print(j) --> 11
+end
+print(j)
