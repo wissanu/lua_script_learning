@@ -43,3 +43,13 @@ while count > 0 do
     print(count, a[count])
     count = count - 1 -- increment with nagative value
 end
+
+print("------------")
+
+-- repeat is most likely a while loop
+local count = 1
+
+repeat
+    print(count, a[count])
+    count = count + 1
+until count > #a
