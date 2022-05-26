@@ -1,26 +1,32 @@
-local route_1 = coroutine.create( 
-    function()
-        for i = 1, 10 do
-            print("Route 1 : ["..i.."]")
-            if i == 5 then
-                coroutine.yield()
-            end
+
+threads = {}    -- list of all live threads
+
+function cthread (arg)
+    -- create coroutine
+    local co = coroutine.create(function ()
+        local x = arg
+        for key, value in pairs(x) do
+            print(value)
+        end
+    end)
+    -- insert it in the list
+    table.insert(threads, co)
+end
+
+cthread({1,2,3,4,5})
+cthread({11,12,13,14,15})
+cthread({21,22,23,24,25})
+
+
+while true do
+    local n = #threads
+    if n == 0 then break end   -- no more threads to run
+    for i=1,n do
+        local status, res = coroutine.resume(threads[i])
+        print(status)
+        if not res then    -- thread finished its task?
+            table.remove(threads, i)
+            break
         end
     end
-)
-
-local route_2 = coroutine.create(
-    function()
-        for i = 20, 15, -1 do
-            print("Route 2 : ["..i.."]")
-        end
-    end
-)
-
-print(coroutine.status(route_1))
-coroutine.resume(route_1)
-print(coroutine.status(route_1))
-coroutine.resume(route_2)
-print(coroutine.status(route_2))
-coroutine.resume(route_1)
-print(coroutine.status(route_1))
+end
